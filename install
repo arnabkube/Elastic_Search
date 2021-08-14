@@ -1,0 +1,39 @@
+https://www.elastic.co/guide/en/elasticsearch/reference/current/rpm.html
+
+#import key
+
+rpm --import https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+#download rpm
+
+wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.14.0-x86_64.rpm
+
+#Install RPM
+
+rpm --install elasticsearch-7.14.0-x86_64.rpm
+
+
+#disable firewall
+systemctl stop firewalld
+systemctl disable firewalld
+
+#disable selinux
+
+#Check the current SELinux status, run: sestatus
+#To disable SELinux on CentOS 7 temporarily, run: sudo setenforce 0
+#Edit the /etc/selinux/config file and set the SELINUX to disabled
+#Reboot the Linux server
+#Verify it by running the sestatus and getenforce again
+
+#Start and enable Elasticsearch service
+systemctl start elasticsearch.service 
+systemctl enable elasticsearch.service 
+
+#Initial test commands
+
+curl localhost:9200
+
+curl localhost:9200/_cat/nodes?v
+
+
+curl localhost:9200/_cat/health?v
